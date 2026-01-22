@@ -17,7 +17,13 @@
                     </h1>
                 </div>
                 <nav class="site-navigation">
-                    <ul class="menu">
+                    <button class="menu-toggle" aria-controls="primary-menu" aria-expanded="false">
+                        <span></span>
+                        <span></span>
+                        <span></span>
+                    </button>
+
+                    <ul class="menu" id="primary-menu">
                         <li><a href="{{ '/' | url }}">Начало</a></li>
                         <li><a href="{{ '/ezitsi/' | url }}">Езици</a></li>
                         <li class="menu-item-has-children">
@@ -25,7 +31,7 @@
                             <ul class="sub-menu">
                                 <li><a href="{{ '/legalizatsia/' | url }}">Заверка и легализация</a></li>
                                 <li><a href="{{ '/apostil/' | url }}">Какво представлява Апостилът?</a></li>
-                                <li><a href="{{ '/ustni-prevodi/' | url }}">Устни преводи</a></li>
+                                <li><a href="{{ '/ustni-prevodi/' | url }}">Устni преводи</a></li>
                             </ul>
                         </li>
                         <li><a href="{{ '/kontakti/' | url }}">Контакти</a></li>
@@ -51,5 +57,22 @@
             <a href="#top" class="to-top">↑</a>
         </div>
     </footer>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const nav = document.querySelector('.site-navigation');
+            const button = document.querySelector('.menu-toggle');
+
+            if (button) {
+                button.onclick = function() {
+                    nav.classList.toggle('toggled');
+
+                    // Accessibility update
+                    const expanded = nav.classList.contains('toggled');
+                    button.setAttribute('aria-expanded', expanded);
+                };
+            }
+        });
+    </script>
 </body>
 </html>
